@@ -1,0 +1,102 @@
+module CoffeeAutomat(
+ input clk,
+ input [9:0] card_currency,//coin input
+ input [3:0] selection,//coffee_selection
+ 
+ //output reg [9:0] new_card_currency,
+ output reg [4:0] espresso_storage_amount, cappuccino_storage_amount, americano_storage_amount, 
+macchiato_storage_amount,//in the beginning this machine can make 20 coffee for each coffee type
+ output reg [9:0] new_card_currency,
+ output reg allow_access// enough coin or not
+ );
+ initial begin
+ espresso_storage_amount=5'b10100;
+ cappuccino_storage_amount=5'b00101;
+ americano_storage_amount=5'b00011;
+ macchiato_storage_amount=5'b00001;
+ 
+ end
+ always@(posedge clk)
+ begin
+ if(selection == 1'd1)
+ begin
+ if(espresso_storage_amount>1'b0)
+ begin
+ if(card_currency>=3'd3)
+ begin
+ allow_access=1;
+ espresso_storage_amount=espresso_storage_amount-1;
+ new_card_currency=card_currency-2'd3;
+ end
+ else
+ begin// not enough money
+ allow_access=0;
+ end
+ end
+ else
+ begin// not enough coffee
+ allow_access=0;
+ end
+ end
+ 
+ if(selection == 2'd2)
+ begin
+ if(cappuccino_storage_amount>1'b0)
+ begin;
+ if(card_currency>=3'd5)
+ begin
+ allow_access=1;
+ cappuccino_storage_amount=cappuccino_storage_amount-1;
+ new_card_currency=card_currency-3'd5;
+ end
+ else
+ begin// not enough money
+ allow_access=0;
+ end
+ end
+ else
+ begin// not enough coffee
+ allow_access=0;
+ end
+ end
+ 
+ if(selection == 2'd3)
+ begin
+ if(americano_storage_amount>1'b0)
+ begin
+ if(card_currency>=3'd7)
+ begin
+ allow_access=1;
+ americano_storage_amount=americano_storage_amount-1;
+ new_card_currency=card_currency-3'd7;
+ end
+ else 
+ begin// not enough money
+ allow_access=0;
+ end
+ end
+ else 
+ begin// not enough coffee
+ allow_access=0;
+ end
+ end
+ 
+ if(selection == 3'd4)
+ begin
+ if(macchiato_storage_amount>1'b0)
+ begin
+ if(card_currency>=4'd9)
+ begin
+ allow_access=1;
+ macchiato_storage_amount=macchiato_storage_amount-1;
+ new_card_currency=card_currency-4'd9;
+ end
+ else 
+ begin// not enough money
+ allow_access=0;
+ new_card_currency=card_currency;
+ end
+ end
+ else 
+ begin// not enough coffee
+ allow_access=0;

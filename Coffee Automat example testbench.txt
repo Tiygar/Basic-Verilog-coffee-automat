@@ -1,0 +1,29 @@
+module coffeeAutomattb;
+reg clk;
+reg [9:0] card_currency;
+reg [3:0] selection;
+//wire [9:0] new_card_currency;
+wire [4:0] espresso_storage_amount, cappuccino_storage_amount, americano_storage_amount, 
+macchiato_storage_amount;
+wire [9:0] new_card_currency;
+wire allow_access;
+CoffeeAutomat UUT(clk, card_currency, selection, espresso_storage_amount, 
+cappuccino_storage_amount, americano_storage_amount, macchiato_storage_amount, 
+new_card_currency, allow_access);
+initial begin 
+clk=0;
+forever
+#15 clk=~clk;
+end
+initial begin
+card_currency=10'b0000000111;
+selection = 1'd1; // esp coffee type has been selected 
+#30;
+card_currency=10'b0000000111;
+selection = 2'd2; // cap coffee type has been selected 
+#30;
+card_currency=10'b0000000111;
+selection = 2'd3; // america coffee type has been selected 
+#30;
+card_currency=10'b0000000111;
+selection = 3'd4; // macc coffee type has been selected 
