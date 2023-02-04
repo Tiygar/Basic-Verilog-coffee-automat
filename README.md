@@ -1,2 +1,4 @@
 # Verilog-coffee-automat
 Basic Verilog simulation for a coffee automat
+Main purpose of the Project: This Project aims to make a vending machine only for coffees. There are 4 types of coffee and user can select any of them and buy any time if they provide enough coin.
+Explanation of the verilog code:This machine initially has some amount of coffee for each type. Then the code starts to read value from the user with each clock tick and reads the coffee selection of the user and checks the card currency for the selected coffee price. If the user has enough coin and if the machine has at least 1 of the selected coffee, it allows user to take a coffee and determines his new card coin. Else, it doesnt let the user to take a coffee. Additionally it lowers the value of the selected coffee from its system to keep the correct value for the amount of the coffees in the system.
